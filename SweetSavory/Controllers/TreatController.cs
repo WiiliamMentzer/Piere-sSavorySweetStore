@@ -34,27 +34,27 @@ namespace SweetSavory.Controllers
 
     public ActionResult Create()
     {
-        var ingredients = _db.Ingredients.Select(c => new { 
-        IngredientId = c.IngredientId, 
-        IngredientName = c.IngredientName 
-    }).ToList();
+    //     var ingredients = _db.Ingredients.Select(c => new { 
+    //     IngredientId = c.IngredientId, 
+    //     IngredientName = c.IngredientName 
+    // }).ToList();
 
-      List<SelectListItem> Rating = new List<SelectListItem>();
-      ViewBag.IngredientSelection = new MultiSelectList(ingredients, "IngredientId", "IngredientName");
+      // List<SelectListItem> Rating = new List<SelectListItem>();
+      // ViewBag.TreatSelection = new MultiSelectList(Treats, "TreatId", "TreatName");
 
       // foreach (Ingredient ingredient in _db.Ingredients)
       // {
       //   IngredientSelection.Add(new SelectListItem { Text = ingredient.IngredientName, Value= ingredient.IngredientName});
       // }
 
-      Rating.Add(new SelectListItem { Text = "5", Value = "5"});
-      Rating.Add(new SelectListItem { Text = "4", Value = "4"});
-      Rating.Add(new SelectListItem { Text = "3", Value = "3"});
-      Rating.Add(new SelectListItem { Text = "2", Value = "2"});
-      Rating.Add(new SelectListItem { Text = "1", Value = "1"});
+      // Rating.Add(new SelectListItem { Text = "5", Value = "5"});
+      // Rating.Add(new SelectListItem { Text = "4", Value = "4"});
+      // Rating.Add(new SelectListItem { Text = "3", Value = "3"});
+      // Rating.Add(new SelectListItem { Text = "2", Value = "2"});
+      // Rating.Add(new SelectListItem { Text = "1", Value = "1"});
 
       // ViewBag.IngredientSelection = IngredientSelection;
-      ViewBag.Rating = Rating;
+      // ViewBag.Rating = Rating;
 
       return View();
     }
@@ -87,7 +87,7 @@ namespace SweetSavory.Controllers
     public ActionResult Edit(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(Treat => Treat.TreatId == id);
-      ViewBag.FlavorId = new SelectList( _db.Categories, "FlavorId", "FlavorName");
+      ViewBag.FlavorId = new SelectList( _db.Flavors, "FlavorId", "FlavorName");
       return View(thisTreat);
     }
 
@@ -102,7 +102,7 @@ namespace SweetSavory.Controllers
     public ActionResult AddFlavor(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(Treat => Treat.TreatId == id);
-      ViewBag.FlavorId = new SelectList( _db.Categories, "FlavorId", "FlavorName");
+      ViewBag.FlavorId = new SelectList( _db.Flavors, "FlavorId", "FlavorName");
       return View(thisTreat);
     }
 

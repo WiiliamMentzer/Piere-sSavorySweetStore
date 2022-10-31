@@ -30,7 +30,7 @@ namespace SweetSavory
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
 
       services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<RecipeBoxContext>()
+        .AddEntityFrameworkStores<SweetSavoryContext>()
         .AddDefaultTokenProviders();
 
       services.Configure<IdentityOptions>(options =>
