@@ -35,19 +35,6 @@ else
         <li>@Html.ActionLink($"{@join.Treat.TreatName}", "Details", "Treats", new { id = join.Treat.TreatId })</li>
       }
     }
-
-
-
-    @foreach(var join in Model.JoinEntities)
-    {
-      <li>@Html.ActionLink($"{@join.Treat.TreatName}", "Details", "Treats", new { id = join.Treat.TreatId })</li>
-      @using (Html.BeginForm("RemoveTreat", "Flavors"))
-      {
-        @Html.Hidden("joinId", @join.FlavorTreatId)
-        <input type="submit" value="Remove"/>
-      }
-    }
-  
   </ul>
 }
 

@@ -12,7 +12,6 @@ using System.Security.Claims;
 
 namespace SweetSavory.Controllers
 {
-  [Authorize]
   public class TreatsController : Controller
   {
     private readonly SweetSavoryContext _db;
@@ -34,18 +33,7 @@ namespace SweetSavory.Controllers
 
     public ActionResult Create()
     {
-    //     var ingredients = _db.Ingredients.Select(c => new { 
-    //     IngredientId = c.IngredientId, 
-    //     IngredientName = c.IngredientName 
-    // }).ToList();
-
       List<SelectListItem> Rating = new List<SelectListItem>();
-      // ViewBag.TreatSelection = new MultiSelectList(Treats, "TreatId", "TreatName");
-
-      // foreach (Ingredient ingredient in _db.Ingredients)
-      // {
-      //   IngredientSelection.Add(new SelectListItem { Text = ingredient.IngredientName, Value= ingredient.IngredientName});
-      // }
 
       Rating.Add(new SelectListItem { Text = "5", Value = "5"});
       Rating.Add(new SelectListItem { Text = "4", Value = "4"});
@@ -53,7 +41,6 @@ namespace SweetSavory.Controllers
       Rating.Add(new SelectListItem { Text = "2", Value = "2"});
       Rating.Add(new SelectListItem { Text = "1", Value = "1"});
 
-      // ViewBag.IngredientSelection = IngredientSelection;
       ViewBag.Rating = Rating;
 
       return View();
@@ -117,24 +104,6 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
-    // public ActionResult AddIngredient(int id)
-    // {
-    //   var thisTreat = _db.Treats.FirstOrDefault(Treat => Treat.TreatId == id);
-    //   ViewBag.IngredientId = new SelectList( _db.Ingredients, "IngredientId", "IngredientName");
-    //   return View(thisTreat);
-    // }
-
-    // [HttpPost]
-    // public ActionResult AddIngredient(Recipe Recipe, int IngredientId)
-    // {
-    //   if (IngredientId != 0)
-    //   {
-    //     _db.RecipeIngredient.Add(new RecipeIngredient() { RecipeId = Recipe.RecipeId, IngredientId = IngredientId });
-    //     _db.SaveChanges();
-    //   }
-    //   return RedirectToAction("Index");
-    // }
-
     public ActionResult Delete(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(Treat => Treat.TreatId == id);
@@ -150,13 +119,13 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
-    // [HttpPost]
-    // public ActionResult RemoveIngredient(int joinId)
-    // {
-    //   var joinEntry = _db.TreatIngredient.FirstOrDefault(entry => entry.TreatIngredientId == joinId);
-    //   _db.TreatIngredient.Remove(joinEntry);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    public ActionResult RemoveFlavor(int joinId)
+    {
+      var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+      _db.FlavorTreat.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
