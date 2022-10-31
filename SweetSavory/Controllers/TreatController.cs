@@ -39,7 +39,7 @@ namespace SweetSavory.Controllers
     //     IngredientName = c.IngredientName 
     // }).ToList();
 
-      // List<SelectListItem> Rating = new List<SelectListItem>();
+      List<SelectListItem> Rating = new List<SelectListItem>();
       // ViewBag.TreatSelection = new MultiSelectList(Treats, "TreatId", "TreatName");
 
       // foreach (Ingredient ingredient in _db.Ingredients)
@@ -47,14 +47,14 @@ namespace SweetSavory.Controllers
       //   IngredientSelection.Add(new SelectListItem { Text = ingredient.IngredientName, Value= ingredient.IngredientName});
       // }
 
-      // Rating.Add(new SelectListItem { Text = "5", Value = "5"});
-      // Rating.Add(new SelectListItem { Text = "4", Value = "4"});
-      // Rating.Add(new SelectListItem { Text = "3", Value = "3"});
-      // Rating.Add(new SelectListItem { Text = "2", Value = "2"});
-      // Rating.Add(new SelectListItem { Text = "1", Value = "1"});
+      Rating.Add(new SelectListItem { Text = "5", Value = "5"});
+      Rating.Add(new SelectListItem { Text = "4", Value = "4"});
+      Rating.Add(new SelectListItem { Text = "3", Value = "3"});
+      Rating.Add(new SelectListItem { Text = "2", Value = "2"});
+      Rating.Add(new SelectListItem { Text = "1", Value = "1"});
 
       // ViewBag.IngredientSelection = IngredientSelection;
-      // ViewBag.Rating = Rating;
+      ViewBag.Rating = Rating;
 
       return View();
     }

@@ -1,0 +1,43 @@
+@{
+  Layout = "_Layout";
+}
+
+@model SweetSavory.Models.Treat
+@using System.Security.Claims;
+
+<h2>Treat Details</h2>
+<hr />
+<h3>@Html.Label("Treat Name:") @Html.DisplayFor(model => model.TreatName)</h3>
+<h3>@Html.Label("Treat Rating:") @Html.DisplayFor(model => model.Rating)</h3>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This Treat has no Flavors.</p>
+}
+else
+{
+  <h4>Flavors: </h4>
+  <ul>
+    @foreach(var join in Model.JoinEntities)
+    {
+      <li>@Html.ActionLink($"{@join.Flavor.FlavorName}", "Details", "Flavors", new { id = join.Flavor.FlavorId })</li>
+    }
+  </ul>
+}
+
+@if(User.Identity.IsAuthenticated)
+{
+<p>@Html.ActionLink("Add A Flavor", "AddFlavor", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Remove A Flavor", "RemoveFlavor", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Add an Ingredient", "AddIngredient", new {id = Model.TreatId})</p>
+<p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId })</p>
+}
+else
+{
+  <p>Please Log In or Register to Edit a Treat Profile.</p>
+  <p>@Html.ActionLink("Register", "Register", "Account")</p>
+  <p>@Html.ActionLink("Log in", "Login", "Account")</p>
+}
+
+<p>@Html.ActionLink("Back To All Treats", "Index")</p>
