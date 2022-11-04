@@ -78,6 +78,16 @@ namespace SweetSavory.Controllers
     {
       var thisTreat = _db.Treats.FirstOrDefault(Treat => Treat.TreatId == id);
       ViewBag.FlavorId = new SelectList( _db.Flavors, "FlavorId", "FlavorName");
+      List<SelectListItem> Rating = new List<SelectListItem>();
+
+      Rating.Add(new SelectListItem { Text = "5", Value = "5"});
+      Rating.Add(new SelectListItem { Text = "4", Value = "4"});
+      Rating.Add(new SelectListItem { Text = "3", Value = "3"});
+      Rating.Add(new SelectListItem { Text = "2", Value = "2"});
+      Rating.Add(new SelectListItem { Text = "1", Value = "1"});
+
+      ViewBag.Rating = Rating;
+
       return View(thisTreat);
     }
 
