@@ -4,9 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using SweetSavory.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace SweetSavory.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly SweetSavoryContext _db;
@@ -16,11 +21,13 @@ namespace SweetSavory.Controllers
       _db = db;
     }
     
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.Flavors.ToList());
     }
 
+    
     public ActionResult Create()
     {
       return View();
@@ -34,6 +41,7 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisFlavor = _db.Flavors
@@ -43,6 +51,7 @@ namespace SweetSavory.Controllers
       return View(thisFlavor);
     }
 
+    
     public ActionResult Edit(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(Flavor => Flavor.FlavorId == id);
@@ -57,6 +66,7 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
+    
     public ActionResult AddTreat(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(Flavor => Flavor.FlavorId == id);
@@ -75,6 +85,7 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
+    
     public ActionResult Delete(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(Flavor => Flavor.FlavorId == id);
@@ -90,7 +101,7 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost]
+    [HttpPost, Authorize]
     public ActionResult RemoveTreat(int joinId)
     {
       var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);

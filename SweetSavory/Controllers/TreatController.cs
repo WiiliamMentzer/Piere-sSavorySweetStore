@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace SweetSavory.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly SweetSavoryContext _db;
@@ -23,6 +24,7 @@ namespace SweetSavory.Controllers
       _db = db;
     }
 
+    [AllowAnonymous]
     public async Task<ActionResult> Index()
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -62,6 +64,7 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisTreat = _db.Treats
@@ -110,7 +113,7 @@ namespace SweetSavory.Controllers
       return View(thisTreat);
     }
 
-    [HttpPost, ActionName("Delete")]
+    [HttpPost, ActionName("Delete"), Authorize]
     public ActionResult DeleteConfirmed(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(Treat => Treat.TreatId == id);
@@ -119,7 +122,7 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost]
+    [HttpPost, Authorize]
     public ActionResult RemoveFlavor(int joinId)
     {
       var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
