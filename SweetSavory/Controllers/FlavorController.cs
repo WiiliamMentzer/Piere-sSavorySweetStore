@@ -101,7 +101,7 @@ namespace SweetSavory.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost, Authorize]
+    [HttpPost]
     public ActionResult RemoveTreat(int joinId)
     {
       var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
